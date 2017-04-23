@@ -38,11 +38,11 @@ EXTERNAL_IP=`dig +short myip.opendns.com @resolver1.opendns.com`
 echo "Authorizing port 22 to your external IP ($EXTERNAL_IP) in security group 'agile_data_science' ..."
 aws ec2 authorize-security-group-ingress --group-name agile_data_science --protocol tcp --cidr $EXTERNAL_IP/32 --port 22
 
-echo ""
-echo "Generating keypair called 'agile_data_science' ..."             # Lose start "  # Lose end " # Make '\n' a newline
-aws ec2 create-key-pair --key-name agile_data_science|jq .KeyMaterial|sed -e 's/^"//' -e 's/"$//'| awk '{gsub(/\\n/,"\n")}1' > ./agile_data_science.pem
-echo "Changing permissions of 'agile_data_science.pem' to 0600 ..."
-chmod 0600 ./agile_data_science.pem
+# echo ""
+# echo "Generating keypair called 'agile_data_science' ..."             # Lose start "  # Lose end " # Make '\n' a newline
+# aws ec2 create-key-pair --key-name agile_data_science|jq .KeyMaterial|sed -e 's/^"//' -e 's/"$//'| awk '{gsub(/\\n/,"\n")}1' > ./agile_data_science.pem
+# echo "Changing permissions of 'agile_data_science.pem' to 0600 ..."
+# chmod 0600 ./agile_data_science.pem
 
 echo ""
 echo "Detecting the default region..."
@@ -85,7 +85,7 @@ echo "Initializing EBS optimized r3.xlarge EC2 instance in region '$DEFAULT_REGI
 aws ec2 run-instances \
     --image-id $UBUNTU_IMAGE_ID \
     --security-groups agile_data_science \
-    --key-name agile_data_science \
+    --key-name aws-key-fast-ai \
     --user-data file://aws/ec2_bootstrap.sh \
     --instance-type r3.xlarge \
     --ebs-optimized \
