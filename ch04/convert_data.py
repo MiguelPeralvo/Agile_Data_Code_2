@@ -1,7 +1,5 @@
 # coding: utf-8
 
-## FEATURE ENGINEERING WITH PYSPARK, PANDAS AND SCIKIT-LEARN
-
 import pyspark
 import sys
 
