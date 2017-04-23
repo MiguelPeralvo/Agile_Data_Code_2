@@ -7,11 +7,6 @@ import sys
 
 
 if __name__ == "__main__":
-
-  if len(sys.argv) != 4:
-      print("Usage: feature_analysis_initial_merge-2.py date ticker datapath") #, file=sys.stderr)
-      exit(-1)
-
   spark = pyspark.sql.SparkSession.builder.master("local[2]").appName("convert_data").getOrCreate()
   sc = spark.sparkContext
   sqlContext = spark
